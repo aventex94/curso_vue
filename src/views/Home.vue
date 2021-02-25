@@ -12,7 +12,11 @@
 		<h1 v-for="x in titulos" :key="x">
 			{{ x }}
 		</h1>
-
+		<h1>
+			{{ titulosTotales }}
+			<br />
+			{{ hola }}
+		</h1>
 		<h1></h1>
 		<ul>
 			<li v-for="partido in partidos" :key="partido">
@@ -53,6 +57,7 @@
 		mounted() {
 			console.log("Hola mundo");
 			this.mostrarNombre();
+			this.titulo1 = "este valor cambia aca";
 		},
 		methods: {
 			mostrarNombre() {
@@ -64,8 +69,19 @@
 			},
 			cargarUsuario() {},
 		},
-		computed: {},
-		watchs: {},
+		computed: {
+			titulosTotales() {
+				return this.titulo1 + " aca se utiliza el computed";
+			},
+			hola() {
+				return this.titulo2 + " Hola como estas";
+			},
+		},
+		watch: {
+			titulo1() {
+				this.titulo1 = " aca se utiliza el watch";
+			},
+		},
 	};
 </script>
 <style></style>

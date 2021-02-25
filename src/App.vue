@@ -1,14 +1,15 @@
 <template>
-	<home></home>
+	<base-component></base-component>
 </template>
 
 <script>
-	import Home from "./views/Home";
+	import BaseComponent from "./components/BaseComponent.vue";
+
 	export default {
 		name: "App",
 
 		components: {
-			Home,
+			BaseComponent,
 		},
 
 		data: () => ({
