@@ -34,6 +34,8 @@
 	</div>
 </template>
 <script>
+	import axios from "axios";
+
 	import Titulo from "../components/Titulo";
 	export default {
 		components: {
@@ -43,7 +45,7 @@
 		data() {
 			return {
 				titulo1: "Esto es un componente",
-
+				leagues: [],
 				titulo2: "Esto es un componente 2",
 
 				titulos: {
@@ -55,9 +57,33 @@
 			};
 		},
 		mounted() {
-			console.log("Hola mundo");
+			/* console.log("Hola mundo");
 			this.mostrarNombre();
-			this.titulo1 = "este valor cambia aca";
+			this.titulo1 = "este valor cambia aca"; */
+
+			console.log(this.$store.getters.user);
+
+			this.$store.dispatch("modifUser");
+
+			const options = {
+				method: "GET",
+				url: "https://api-football-v1.p.rapidapi.com/v2/leagues/country/england/2018",
+				headers: {
+					"x-rapidapi-key": "65225dac38msh79b92e0eacad9cdp1643fcjsn86d83012722b",
+					"x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+				},
+			};
+
+			axios
+				.request(options)
+				.then(function (response) {
+					this.leagues = response.data;
+					localStorage.set("leagues", response.data);
+					console.log(localStorage.get("leagues"));
+				})
+				.catch(function (error) {
+					console.error(error);
+				});
 		},
 		methods: {
 			mostrarNombre() {
